@@ -2,9 +2,9 @@
 
 namespace TriviaAppClean;
 
-public partial class AppShell : Shell
+public partial class UserAppShell : Shell
 {
-	public AppShell()
+	public UserAppShell()
 	{
 		InitializeComponent();
 		RegisterRoutes();

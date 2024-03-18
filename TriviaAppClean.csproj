@@ -53,15 +53,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UserAppShell.xaml.cs">
+	    <DependentUpon>UserAppShell.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\OneUserView.xaml.cs">
 	    <DependentUpon>OneUserView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\UserProfileView.xaml.cs">
-	    <DependentUpon>UserProfileView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="ManagerAppShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MasterAppShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\AddQuestionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

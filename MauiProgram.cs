@@ -31,6 +31,9 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<LoginView> ();
+        builder.Services.AddTransient<MasterAppShell>();
+        builder.Services.AddTransient<ManagerAppShell>();
+
         return builder;
     }
 

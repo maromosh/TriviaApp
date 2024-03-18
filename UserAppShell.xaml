@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TriviaAppClean.UserAppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:TriviaAppClean.Views"
+    Shell.FlyoutBehavior="Flyout">
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="User Profile"
+            Icon="user.png" 
+            ContentTemplate="{DataTemplate views:UserProfileView}" 
+            Route= "UserProfile"/>
+
+        <ShellContent
+            Title="Best Scores"
+            Icon="reward.png" 
+            ContentTemplate="{DataTemplate views:BestScoresView}" 
+            Route= "BestScores"/>
+        
+         <!--התנתקות-->
+    </FlyoutItem>
+
+</Shell>
