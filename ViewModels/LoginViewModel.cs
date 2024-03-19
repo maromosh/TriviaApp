@@ -13,6 +13,146 @@ namespace TriviaAppClean.ViewModels
     public class LoginViewModel:ViewModelBase
     {
         private TriviaWebAPIProxy triviaService;
+
+        
+        public LoginViewModel()
+        {
+
+        }
+
+        #region Name
+        private bool showNameError;
+
+        public bool ShowNameError
+        {
+            get => showNameError;
+            set
+            {
+                showNameError = value;
+                OnPropertyChanged("ShowNameError");
+            }
+        }
+
+        private string name;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                ValidateName();
+                OnPropertyChanged("Name");
+            }
+        }
+
+        private string nameError;
+        public string NameError
+        {
+            get => nameError;
+            set
+            {
+                nameError = value;
+                OnPropertyChanged("NameError");
+            }
+        }
+
+        private void ValidateName()
+        {
+            this.ShowNameError = string.IsNullOrEmpty(Name);
+        }
+        #endregion
+
+        #region passWord
+        private bool showPasswordError;
+
+        public bool ShowPasswordError
+        {
+            get => showPasswordError;
+            set
+            {
+                showPasswordError = value;
+                OnPropertyChanged("ShowPasswordError");
+            }
+        }
+
+        private string password;
+
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                ValidatePassword();
+                OnPropertyChanged("Password");
+            }
+        }
+
+        private string passwordError;
+
+        public string PasswordError
+        {
+            get => passwordError;
+            set
+            {
+                passwordError = value;
+                OnPropertyChanged("PasswordError");
+            }
+        }
+
+        private void ValidatePassword()
+        {
+            this.ShowPasswordError = string.IsNullOrEmpty(Password);
+        }
+        #endregion
+
+        //#region Email
+        //private bool showEmailError;
+
+        //public bool ShowEmailError//ShowEmailError
+        //{
+        //    get => showNameError;
+        //    set
+        //    {
+        //        showNameError = value;
+        //        OnPropertyChanged("ShowEmailError");
+        //    }
+        //}
+
+        //private string email;
+
+        //public string Email
+        //{
+        //    get => email;
+        //    set
+        //    {
+        //        email = value;
+        //        ValidateEmail();
+        //        OnPropertyChanged("Email");
+        //    }
+        //}
+
+        //private string emailError;
+
+        //public string EmailError
+        //{
+        //    get => emailError;
+        //    set
+        //    {
+        //        emailError = value;
+        //        OnPropertyChanged("EmailError");
+        //    }
+        //}
+
+        //private void ValidateEmail()
+        //{
+        //    string email = Email;
+        //    Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        //    Match match = regex.Match(email);
+        //    this.ShowEmailError = !match.Success;
+        //}
+        //#endregion
+
         public LoginViewModel(TriviaWebAPIProxy service) 
         {
             InServerCall = false;

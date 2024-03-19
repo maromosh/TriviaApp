@@ -1,12 +1,9 @@
-using TriviaAppClean.ViewModels;
-
 namespace TriviaAppClean.Views;
 
 public partial class LoginView : ContentPage
 {
-	public LoginView(LoginViewModel vm)
+	public LoginView()
 	{
-		this.BindingContext = vm;
 		InitializeComponent();
 	}
 }

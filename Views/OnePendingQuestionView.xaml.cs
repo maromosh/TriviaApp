@@ -1,6 +1,6 @@
 namespace TriviaAppClean.Views;
 
-public partial class OnePendingQuestionView : ContentView
+public partial class OnePendingQuestionView : ContentPage
 {
 	public OnePendingQuestionView()
 	{

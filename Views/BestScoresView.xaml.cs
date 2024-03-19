@@ -1,6 +1,6 @@
 namespace TriviaAppClean.Views;
 
-public partial class BestScoresView : ContentView
+public partial class BestScoresView : ContentPage
 {
 	public BestScoresView()
 	{

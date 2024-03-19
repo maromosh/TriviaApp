@@ -39,8 +39,8 @@
 
         <ShellContent
             Title="All Questions"
-            Icon="question-and-answer.png" 
-            ContentTemplate="{DataTemplate views:AllQuestionView}" 
+            Icon="questionandanswer.png" 
+            ContentTemplate="{DataTemplate views:AllQuestionsView}" 
             Route= "AllQuestions"/>
 
         <!--התנתקות-->

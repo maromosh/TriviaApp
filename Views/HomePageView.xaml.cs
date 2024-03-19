@@ -1,6 +1,6 @@
 namespace TriviaAppClean.Views;
 
-public partial class HomePageView : ContentView
+public partial class HomePageView : ContentPage
 {
 	public HomePageView()
 	{

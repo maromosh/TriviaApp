@@ -1,8 +1,8 @@
 namespace TriviaAppClean.Views;
 
-public partial class NewContent1 : ContentView
+public partial class OneUserView : ContentPage
 {
-	public NewContent1()
+	public OneUserView()
 	{
 		InitializeComponent();
 	}

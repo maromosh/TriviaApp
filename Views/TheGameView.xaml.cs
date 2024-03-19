@@ -1,6 +1,6 @@
 namespace TriviaAppClean.Views;
 
-public partial class TheGameView : ContentView
+public partial class TheGameView : ContentPage
 {
 	public TheGameView()
 	{

@@ -56,9 +56,6 @@
 	  <Compile Update="UserAppShell.xaml.cs">
 	    <DependentUpon>UserAppShell.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\OneUserView.xaml.cs">
-	    <DependentUpon>OneUserView.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -71,7 +68,7 @@
 	  <MauiXaml Update="Views\AddQuestionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AllQuestionView.xaml">
+	  <MauiXaml Update="Views\AllQuestionsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\BestScoresView.xaml">
@@ -89,13 +86,13 @@
 	  <MauiXaml Update="Views\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\OnePendingQuestionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\OneQuestionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\OneUserView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\OnePendingQuestionView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PendingView.xaml">

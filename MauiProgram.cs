@@ -31,8 +31,22 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<LoginView> ();
+        builder.Services.AddTransient<SignUpView>();
+        builder.Services.AddTransient<AllQuestionsView>();
+        builder.Services.AddTransient<BestScoresView>();
+        builder.Services.AddTransient<HomePageView>();
+        builder.Services.AddTransient<ListOfUsersView>();
+        builder.Services.AddTransient<OnePendingQuestionView>();
+        builder.Services.AddTransient<OneQuestionView>();
+        builder.Services.AddTransient<OneUserView>();
+        builder.Services.AddTransient<TheGameView>();
+        builder.Services.AddTransient<UserProfileView>();
+        builder.Services.AddTransient<PendingView>();
+
+
         builder.Services.AddTransient<MasterAppShell>();
         builder.Services.AddTransient<ManagerAppShell>();
+        builder.Services.AddTransient<UserAppShell>();
 
         return builder;
     }
