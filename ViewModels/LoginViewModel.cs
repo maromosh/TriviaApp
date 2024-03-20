@@ -3,62 +3,75 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TriviaAppClean.Models;
 using TriviaAppClean.Services;
+using TriviaAppClean.Views;
 
 namespace TriviaAppClean.ViewModels
 {
     public class LoginViewModel:ViewModelBase
     {
         private TriviaWebAPIProxy triviaService;
+        private SignUpView signUpView;
 
-        
-        public LoginViewModel()
+        public LoginViewModel(TriviaWebAPIProxy service, SignUpView sigunUpView)
         {
-
+            this.signUpView = sigunUpView;
+            InServerCall = false;
+            this.triviaService = service;
+            this.LoginCommand = new Command(OnLogin);
+            this.SignUpCommand = new Command(OnSignUp);
+            this.PasswordError = "This is a required field";
+            this.EmailError = "Invalid Email";
         }
 
-        #region Name
-        private bool showNameError;
+        #region Email
+        private bool showEmailError;
 
-        public bool ShowNameError
+        public bool ShowEmailError//ShowEmailError
         {
-            get => showNameError;
+            get => showEmailError;
             set
             {
-                showNameError = value;
-                OnPropertyChanged("ShowNameError");
+                showEmailError = value;
+                OnPropertyChanged("ShowEmailError");
             }
         }
 
-        private string name;
-        public string Name
+        private string emailLogin;
+
+        public string EmailLogin
         {
-            get => name;
+            get => emailLogin;
             set
             {
-                name = value;
-                ValidateName();
-                OnPropertyChanged("Name");
+                emailLogin = value;
+                ValidateEmail();
+                OnPropertyChanged("Email");
             }
         }
 
-        private string nameError;
-        public string NameError
+        private string emailError;
+
+        public string EmailError
         {
-            get => nameError;
+            get => emailError;
             set
             {
-                nameError = value;
-                OnPropertyChanged("NameError");
+                emailError = value;
+                OnPropertyChanged("EmailError");
             }
         }
 
-        private void ValidateName()
+        private void ValidateEmail()
         {
-            this.ShowNameError = string.IsNullOrEmpty(Name);
+            string email = EmailLogin;
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(email);
+            this.ShowEmailError = !match.Success;
         }
         #endregion
 
@@ -75,14 +88,14 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        private string password;
+        private string passwordLogin;
 
-        public string Password
+        public string PasswordLogin
         {
-            get => password;
+            get => passwordLogin;
             set
             {
-                password = value;
+                passwordLogin = value;
                 ValidatePassword();
                 OnPropertyChanged("Password");
             }
@@ -102,63 +115,9 @@ namespace TriviaAppClean.ViewModels
 
         private void ValidatePassword()
         {
-            this.ShowPasswordError = string.IsNullOrEmpty(Password);
+            this.ShowPasswordError = string.IsNullOrEmpty(PasswordLogin);
         }
         #endregion
-
-        //#region Email
-        //private bool showEmailError;
-
-        //public bool ShowEmailError//ShowEmailError
-        //{
-        //    get => showNameError;
-        //    set
-        //    {
-        //        showNameError = value;
-        //        OnPropertyChanged("ShowEmailError");
-        //    }
-        //}
-
-        //private string email;
-
-        //public string Email
-        //{
-        //    get => email;
-        //    set
-        //    {
-        //        email = value;
-        //        ValidateEmail();
-        //        OnPropertyChanged("Email");
-        //    }
-        //}
-
-        //private string emailError;
-
-        //public string EmailError
-        //{
-        //    get => emailError;
-        //    set
-        //    {
-        //        emailError = value;
-        //        OnPropertyChanged("EmailError");
-        //    }
-        //}
-
-        //private void ValidateEmail()
-        //{
-        //    string email = Email;
-        //    Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-        //    Match match = regex.Match(email);
-        //    this.ShowEmailError = !match.Success;
-        //}
-        //#endregion
-
-        public LoginViewModel(TriviaWebAPIProxy service) 
-        {
-            InServerCall = false;
-            this.triviaService = service;
-            this.LoginCommand = new Command(OnLogin);
-        }
 
         public ICommand LoginCommand { get; set; }
         private async void OnLogin()
@@ -166,7 +125,7 @@ namespace TriviaAppClean.ViewModels
             //Choose the way you want to blobk the page while indicating a server call
             InServerCall=true;
             //await Shell.Current.GoToAsync("connectingToServer");
-            User u  = await this.triviaService.LoginAsync("ofer@ofer.com", "1234");
+            User u  = await this.triviaService.LoginAsync(EmailLogin, PasswordLogin);
             //await Shell.Current.Navigation.PopModalAsync();
             InServerCall = false;
 
@@ -174,13 +133,20 @@ namespace TriviaAppClean.ViewModels
             ((App)Application.Current).LoggedInUser = u;
             if (u == null)
             {
-                
                 await Shell.Current.DisplayAlert("Login", "Login Faild!", "ok");
             }
             else
             {
                 await Shell.Current.DisplayAlert("Login", $"Login Succeed! for {u.Name} with {u.Questions.Count} Questions", "ok");
             }
+        }
+
+        
+
+        public ICommand SignUpCommand { get; set; }
+        private async void OnSignUp()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(signUpView);
         }
 
         private bool inServerCall;

@@ -59,6 +59,18 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<LoginViewModel>();
+        builder.Services.AddTransient<SignUpViewModel>();
+        builder.Services.AddTransient<AllQuestionViewModel>();
+        builder.Services.AddTransient<BestScoresViewModel>();
+        builder.Services.AddTransient<HomePageViewModel>();
+        builder.Services.AddTransient<ListOfUsersViewModel>();
+        builder.Services.AddTransient<OnePendingQuestionViewModel>();
+        builder.Services.AddTransient<OneQuestionViewModel>();
+        builder.Services.AddTransient<OneUserViewModel>();
+        builder.Services.AddTransient<TheGameViewModel>();
+        builder.Services.AddTransient<UserProfileViewModel>();
+        builder.Services.AddTransient<PendingViewModel>();
+
         return builder;
     }
 }

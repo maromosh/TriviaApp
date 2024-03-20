@@ -12,6 +12,6 @@ public partial class App : Application
 		LoggedInUser = null;
 		InitializeComponent();
 
-		MainPage = new ManagerAppShell();
+		MainPage = new NavigationPage(login);
 	}
 }
