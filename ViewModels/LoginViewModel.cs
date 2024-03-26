@@ -118,10 +118,19 @@ namespace TriviaAppClean.ViewModels
             this.ShowPasswordError = string.IsNullOrEmpty(PasswordLogin);
         }
         #endregion
-
+        private void ValidateForm()
+        {
+            ValidateEmail();
+            ValidatePassword();
+        }
         public ICommand LoginCommand { get; set; }
         private async void OnLogin()
         {
+            ValidateForm();
+            if (ShowEmailError || ShowPasswordError)
+            {
+                return;
+            }
             //Choose the way you want to blobk the page while indicating a server call
             InServerCall=true;
             //await Shell.Current.GoToAsync("connectingToServer");
@@ -133,11 +142,11 @@ namespace TriviaAppClean.ViewModels
             ((App)Application.Current).LoggedInUser = u;
             if (u == null)
             {
-                await Shell.Current.DisplayAlert("Login", "Login Faild!", "ok");
+                await Application.Current.MainPage.DisplayAlert("Login", "Login Faild!", "ok");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Login", $"Login Succeed! for {u.Name} with {u.Questions.Count} Questions", "ok");
+                await Application.Current.MainPage.DisplayAlert("Login", $"Login Succeed! for {u.Name} with {u.Questions.Count} Questions", "ok");
             }
         }
 

@@ -9,7 +9,7 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <Entry Placeholder="Type Email here..." Text="{Binding EmaiLogin}"></Entry>
+        <Entry Placeholder="Type Email here..." Text="{Binding EmailLogin}"></Entry>
         
         
         <Label 
@@ -20,6 +20,12 @@
         <Entry Placeholder="Type Location Here..." Text="{Binding PasswordLogin}" Margin="5"></Entry>
 
         <Button Text="Submit" Command="{Binding LoginCommand}" Margin="5"></Button>
+
+        <Label
+            Text="{Binding ShowEmailError}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />   
+
 
         <Button Text="Go To SignUp" Command="{Binding SignUpCommand}" Margin="5"></Button>
 
