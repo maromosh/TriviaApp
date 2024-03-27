@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using TriviaAppClean.Models;
 using TriviaAppClean.Services;
 using TriviaAppClean.Views;
 
@@ -15,13 +17,11 @@ namespace TriviaAppClean.ViewModels
 
         public SignUpViewModel(TriviaWebAPIProxy service)
         {
-            //this.signUpView = sigunUpView;
-            //InServerCall = false;
-            //this.triviaService = service;
-            //this.LoginCommand = new Command(OnLogin);
-            //this.SignUpCommand = new Command(OnSignUp);
-            //this.PasswordError = "This is a required field";
-            //this.EmailError = "Invalid Email";
+            this.triviaService = service;
+            this.NameError = "This is a required field";
+            this.PasswordError = "This is a required field";
+            this.EmailError = "Invalid Email";
+            this.SignUpCommand = new Command(OnSignUp);
         }
 
         #region Name
@@ -37,13 +37,13 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        private string name;
-        public string Name
+        private string nameSignUp;
+        public string NameSignUp
         {
-            get => name;
+            get => nameSignUp;
             set
             {
-                name = value;
+                nameSignUp = value;
                 ValidateName();
                 OnPropertyChanged("Name");
             }
@@ -62,7 +62,7 @@ namespace TriviaAppClean.ViewModels
 
         private void ValidateName()
         {
-            this.ShowNameError = string.IsNullOrEmpty(Name);
+            this.ShowNameError = string.IsNullOrEmpty(NameSignUp);
         }
         #endregion
 
@@ -79,14 +79,14 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        private string emailLogin;
+        private string emailSignUp;
 
-        public string EmailLogin
+        public string EmailSignUp
         {
-            get => emailLogin;
+            get => emailSignUp;
             set
             {
-                emailLogin = value;
+                emailSignUp = value;
                 ValidateEmail();
                 OnPropertyChanged("Email");
             }
@@ -106,9 +106,9 @@ namespace TriviaAppClean.ViewModels
 
         private void ValidateEmail()
         {
-            string email = EmailLogin;
+            string email1 = EmailSignUp;
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            Match match = regex.Match(email);
+            Match match = regex.Match(email1);
             this.ShowEmailError = !match.Success;
         }
         #endregion
@@ -126,14 +126,14 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        private string passwordLogin;
+        private string passwordSignUp;
 
-        public string PasswordLogin
+        public string PasswordSignUp
         {
-            get => passwordLogin;
+            get => passwordSignUp;
             set
             {
-                passwordLogin = value;
+                passwordSignUp = value;
                 ValidatePassword();
                 OnPropertyChanged("Password");
             }
@@ -153,9 +153,52 @@ namespace TriviaAppClean.ViewModels
 
         private void ValidatePassword()
         {
-            this.ShowPasswordError = string.IsNullOrEmpty(PasswordLogin);
+            this.ShowPasswordError = string.IsNullOrEmpty(PasswordSignUp);
         }
         #endregion
+
+        private bool ValidateForm()
+        {
+            ValidateEmail();
+            ValidatePassword();
+            ValidateName();
+            if (ShowEmailError || ShowNameError || ShowPasswordError)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public ICommand SignUpCommand { get; set; }
+        private async void OnSignUp()
+        {
+            if (ValidateForm())
+            {
+                User user = new User()
+                {
+                    Name = this.nameSignUp,
+                    Email = this.emailSignUp,
+                    Password = this.passwordSignUp
+                };
+                bool succes = await triviaService.RegisterUser(user);
+
+                if (!succes)
+                {
+                    await App.Current.MainPage.DisplayAlert("Sign up", "Sign up Faild!", "ok");
+                }
+                else
+                {
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }
+
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Sign up", "Sign up Faild!", "ok");
+            }
+        }
+
+
     }
 
 }

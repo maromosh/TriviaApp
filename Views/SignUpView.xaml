@@ -3,10 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaAppClean.Views.SignUpView"
              Title="SignUpView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ErrorStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="TextColor" Value="Red" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout Margin="5">
+       
+        <!-- email -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Email"  Grid.Column="0" />
+            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource ErrorStyle}"/>
+        </Grid>
+
+        <Entry Placeholder="enter Email..." Text="{Binding EmailSignUp}"/>
+        
+        <!-- Name -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label 
+             Text="Name" 
+             Grid.Column="0" />
+
+            <Label Text="{Binding NameError}" IsVisible="{Binding ShowNameError}" Grid.Column="1" Style="{StaticResource ErrorStyle}"/>
+        </Grid>
+
+        <Entry Placeholder="enter name..." Text="{Binding NameSignUp}"/>
+
+        <!-- passWord -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label  
+             Text="PassWord" 
+             Grid.Column="0"/>
+            
+            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource ErrorStyle}" />
+        </Grid>
+
+        <Entry Placeholder="Enter password..." Text="{Binding PasswordSignUp}" IsPassword="True" />
+
+
+        <Button Text="Submit SignUp" Command="{Binding SignUpCommand}" IsEnabled="{Binding NotInServerCall}"></Button>
+
+        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Red"></ActivityIndicator>
+        
     </VerticalStackLayout>
 </ContentPage>
