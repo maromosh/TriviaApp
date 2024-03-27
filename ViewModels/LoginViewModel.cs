@@ -16,8 +16,11 @@ namespace TriviaAppClean.ViewModels
     {
         private TriviaWebAPIProxy triviaService;
         private SignUpView signUpView;
+        private ManagerAppShell managerAppShell;
+        private UserAppShell userAppShell;
+        private MasterAppShell masterAppShell;
 
-        public LoginViewModel(TriviaWebAPIProxy service, SignUpView sigunUpView)
+        public LoginViewModel(TriviaWebAPIProxy service, SignUpView sigunUpView, ManagerAppShell managerShell, UserAppShell userAppShell, MasterAppShell masterAppShell)
         {
             this.signUpView = sigunUpView;
             InServerCall = false;
@@ -26,6 +29,9 @@ namespace TriviaAppClean.ViewModels
             this.SignUpCommand = new Command(OnSignUp);
             this.PasswordError = "This is a required field";
             this.EmailError = "Invalid Email";
+            this.managerAppShell = managerShell;
+            this.userAppShell = userAppShell;
+            this.masterAppShell = masterAppShell;
         }
 
         #region Email
@@ -65,6 +71,39 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged("EmailError");
             }
         }
+        //private string writeEmailError = "";
+        //public string WriteEmailError
+        //{
+        //    get => writeEmailError;
+        //    set
+        //    {
+        //        writeEmailError = value;
+        //        OnPropertyChanged("EmailError");
+        //    }
+        //}
+        //private string writePasswordError = "";
+        //public string WritePasswordError
+        //{
+        //    get => writePasswordError;
+        //    set
+        //    {
+        //        writePasswordError = value;
+        //        OnPropertyChanged("PasswordError");
+        //    }
+        //}
+        //public void WriteErrors()
+        //{
+        //    if (ShowEmailError == true)
+        //    {
+        //        writeEmailError = "You have an error in your Email";
+        //        Console.WriteLine(writeEmailError);
+        //    }
+        //    else if (ShowPasswordError == true)
+        //    {
+        //        writePasswordError = "You have an error in your password";
+        //        Console.WriteLine(writePasswordError);
+        //    }
+        //}
 
         private void ValidateEmail()
         {
@@ -87,6 +126,7 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged("ShowPasswordError");
             }
         }
+         
 
         private string passwordLogin;
 
@@ -129,6 +169,7 @@ namespace TriviaAppClean.ViewModels
             ValidateForm();
             if (ShowEmailError || ShowPasswordError)
             {
+                await Console.Out.WriteLineAsync("You have an error");
                 return;
             }
             //Choose the way you want to blobk the page while indicating a server call
@@ -146,7 +187,18 @@ namespace TriviaAppClean.ViewModels
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Login", $"Login Succeed! for {u.Name} with {u.Questions.Count} Questions", "ok");
+                await Application.Current.MainPage.DisplayAlert("Login", $"Login Succeed!", "ok");
+                if (u.Rank == 2) //Admin
+                {
+                    Application.Current.MainPage = managerAppShell;
+                }
+                else if (u.Rank == 1)
+                {
+                    Application.Current.MainPage = masterAppShell;
+                }
+                else
+                    Application.Current.MainPage = userAppShell;
+
             }
         }
 
