@@ -3,28 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TriviaAppClean.Views.LoginView"
              Title="LoginView">
-    <VerticalStackLayout Margin="5">
-        <Label 
-            Text="Enter email"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelNameStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+            <Style x:Key="labelErrorStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="TextColor" Value="Red" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Fill" />
+            </Style>
 
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout Margin="5">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="Email" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+            <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
         <Entry Placeholder="Type Email here..." Text="{Binding EmailLogin}"></Entry>
         
         
-        <Label 
-            Text="Enter password"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
+       
 
-        <Entry Placeholder="Type Location Here..." Text="{Binding PasswordLogin}" Margin="5"></Entry>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Text="Password" Grid.Column="0" Style="{StaticResource labelNameStyle}"/>
+            <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}"/>
+        </Grid>
+        <Entry Placeholder="Type Password Here..." Text="{Binding PasswordLogin}" Margin="5" IsPassword="True"></Entry>
 
         <Button Text="Submit" Command="{Binding LoginCommand}" Margin="5"></Button>
 
-        <Label
-            Text="{Binding ShowEmailError}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
+        
+
+        
 
 
         <Button Text="Go To SignUp" Command="{Binding SignUpCommand}" Margin="5"></Button>
