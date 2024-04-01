@@ -7,6 +7,12 @@
 
     <FlyoutItem  FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
+        Title="Home page"
+        Icon="house.png" 
+        ContentTemplate="{DataTemplate views:HomePageView}" 
+        Route= "HomePage"/>
+        
+        <ShellContent
         Title="User Profile"
         Icon="user.png" 
         ContentTemplate="{DataTemplate views:UserProfileView}" 

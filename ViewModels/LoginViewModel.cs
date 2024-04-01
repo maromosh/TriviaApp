@@ -174,9 +174,9 @@ namespace TriviaAppClean.ViewModels
             }
             //Choose the way you want to blobk the page while indicating a server call
             InServerCall=true;
-            //await Shell.Current.GoToAsync("connectingToServer");
+            await Application.Current.MainPage.Navigation.PushModalAsync(new ConnectingToServerView());
             User u  = await this.triviaService.LoginAsync(EmailLogin, PasswordLogin);
-            //await Shell.Current.Navigation.PopModalAsync();
+            await Application.Current.MainPage.Navigation.PopModalAsync();
             InServerCall = false;
 
             //Set the application logged in user to be whatever user returned (null or real user)
