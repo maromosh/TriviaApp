@@ -203,13 +203,14 @@ namespace TriviaAppClean.ViewModels
         }
 
         
-
+        // <summary>
         public ICommand SignUpCommand { get; set; }
         private async void OnSignUp()
         {
             await Application.Current.MainPage.Navigation.PushAsync(signUpView);
         }
 
+         // </summary>
         private bool inServerCall;
         public bool InServerCall
         {

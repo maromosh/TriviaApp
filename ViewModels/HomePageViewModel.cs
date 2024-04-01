@@ -11,10 +11,16 @@ namespace TriviaAppClean.ViewModels
     public class HomePageViewModel :ViewModelBase
     {
         private TheGameView theGameView;
+        public HomePageViewModel(TheGameView theGameView)
+        {
+            this.theGameView = theGameView;
+            this.StartGameCommand = new Command(OnStartGame);
+        }
         public ICommand StartGameCommand { get; set; }
         private async void OnStartGame()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(theGameView);
+            await Shell.Current.GoToAsync("theGame");
         }
+       
     }
 }

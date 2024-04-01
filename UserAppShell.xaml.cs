@@ -13,5 +13,6 @@ public partial class UserAppShell : Shell
 	private void RegisterRoutes()
 	{
         Routing.RegisterRoute("connectingToServer", typeof(ConnectingToServerView));
+        Routing.RegisterRoute("theGame", typeof(TheGameView));
     }
 }
