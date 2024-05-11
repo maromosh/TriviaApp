@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TriviaAppClean.ViewModels
 {
-    public class OneQuestionViewModel
+    public class OneQuestionViewModel : ViewModelBase
     {
     }
 }

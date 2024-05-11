@@ -5,10 +5,55 @@
              Title="TheGameView"  
              Shell.PresentationMode="Modal"
              >
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome To The Game!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+<VerticalStackLayout>
+    <Grid Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Text="{Binding Score}" 
+                   HorizontalOptions="Start" 
+                   TextColor="Purple" 
+                   FontAttributes="Bold"/>
+        <Label Grid.Column="0" Grid.Row="1"
+                   Text="{Binding  Question.QText}" 
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"/>
+        <Button Grid.Column="0" Grid.Row="1" 
+                    BackgroundColor="{Binding Answer1Color}"
+                    Text="{Binding Answers[0]}"
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold" 
+                    Command="{Binding AnswerCommand1 }" />
+        <Button Grid.Column="0" Grid.Row="2" 
+                    Text="{Binding Answers[1]}"  
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold" 
+                    Command="{Binding AnswerCommand2 }" 
+                    BackgroundColor="{Binding Answer2Color}"/>
+        <Button Grid.Column="0" Grid.Row="3"
+                    Text="{Binding Answers[2]}" 
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold" 
+                    Command="{Binding AnswerCommand3 }" 
+                    BackgroundColor="{Binding Answer3Color}"/>
+        <Button Grid.Column="0" Grid.Row="4"
+                    Text="{Binding Answers[3]}"  
+                    HorizontalOptions="Start"
+                    FontAttributes="Bold" 
+                    Command="{Binding AnswerCommand4 }" 
+                    BackgroundColor="{Binding Answer4Color}"/>
+
+    </Grid>
+    <Button Text="Next question" BackgroundColor="MediumPurple" Command="{Binding NextQuestionCommand}" Margin="80" Padding="20" />
+
+</VerticalStackLayout>
