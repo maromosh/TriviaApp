@@ -17,12 +17,11 @@ namespace TriviaAppClean.ViewModels
         {
 
             triviaService = service;
+            this.Users = new ObservableCollection<User>();
             ReadUsers();
         }
 
-        private string name;
-        private int score;
-
+       
 
         private ObservableCollection<User> users;
         public ObservableCollection<User> Users
@@ -35,41 +34,10 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
-        private TriviaWebAPIProxy userService;
-        public TriviaWebAPIProxy UserService
-        {
-            get { return userService; }
-            set
-            {
-                this.userService = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-                name = value;
-
-            }
-        }
-        public int Score
-        {
-            get
-            {
-                return score;
-            }
-            set { score = value; }
-        }
+        
         private async void ReadUsers()
         {
-            TriviaWebAPIProxy service = this.userService;
-            List<User> list = await service.GetAllUsers();
+            List<User> list = await triviaService.GetAllUsers();
             list = list.OrderByDescending(u => u.Score).ToList();
             this.Users = new ObservableCollection<User>(list);
         }

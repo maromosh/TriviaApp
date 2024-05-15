@@ -125,6 +125,10 @@ namespace TriviaAppClean.ViewModels
         private async void GetQuestion()
         {
             Question = await triviaService.GetRandomQuestion();
+            Answer1Color = Colors.Black;
+            Answer2Color = Colors.Black;
+            Answer3Color = Colors.Black;
+            Answer4Color = Colors.Black;
             ScrambleAnswers();
 
         }
@@ -135,67 +139,60 @@ namespace TriviaAppClean.ViewModels
             this.Answers.Add(Question.Bad1);
             this.Answers.Add(Question.Bad2);
             this.Answers.Add(Question.Bad3);
+            Shuffle<string>(this.Answers);
             OnPropertyChanged("Answers");
         }
 
+        static void Shuffle<T>(ObservableCollection<T> list)
+        {
+            Random rng = new Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
 
         private void GetCorrectAnswer1()
         {
             string answer = Answers[0];
-            if (question != null)
-            {
-                if (question.CorrectAnswer == answer)
-                {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
-                }
-
-                Answer1Color = Colors.Red;
-
-            }
+            CheckAnswer(Answer1Color, answer, "Answer1Color");
         }
         private void GetCorrectAnswer2()
         {
             string answer = Answers[1];
-            if (question != null)
-            {
-                if (question.CorrectAnswer == answer)
-                {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
-                }
-
-                Answer1Color = Colors.Red;
-            }
+            CheckAnswer(Answer2Color, answer, "Answer2Color");
+            
         }
         private void GetCorrectAnswer3()
         {
             string answer = Answers[2];
-            if (question != null)
-            {
-                if (question.CorrectAnswer == answer)
-                {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
-                }
-
-                Answer1Color = Colors.Red;
-            }
+            CheckAnswer(Answer3Color, answer, "Answer3Color");
         }
         private void GetCorrectAnswer4()
         {
             string answer = Answers[3];
+            CheckAnswer(Answer4Color, answer, "Answer4Color");
+        }
+
+        private void CheckAnswer(Color answerColor, string answer, string propName)
+        {
             if (question != null)
             {
                 if (question.CorrectAnswer == answer)
                 {
-                    score = score + 10;
-                    Answer1Color = Colors.Green;
+                    Score = Score + 10;
+                    answerColor = Colors.Green;
                 }
+                else
+                    answerColor = Colors.Red;
 
-                Answer1Color = Colors.Red;
+                OnPropertyChanged(propName);
             }
         }
-
     }
 }
