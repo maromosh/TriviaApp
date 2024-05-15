@@ -13,6 +13,22 @@ namespace TriviaAppClean.ViewModels
     public class TheGameViewModel : ViewModelBase
     {
         TriviaWebAPIProxy triviaService;
+        public TheGameViewModel(TriviaWebAPIProxy service)
+        {
+            this.triviaService = service;
+            this.NextQuestionCommand = new Command(GetQuestion);
+            this.AnswerCommand1 = new Command(GetCorrectAnswer1);
+            this.AnswerCommand2 = new Command(GetCorrectAnswer2);
+            this.AnswerCommand3 = new Command(GetCorrectAnswer3);
+            this.AnswerCommand4 = new Command(GetCorrectAnswer4);
+            this.Answer1Color = new Color();
+            this.Answer2Color = new Color();
+            this.Answer3Color = new Color();
+            this.Answer4Color = new Color();
+            Answers = new ObservableCollection<string>();
+            GetQuestion();
+
+        }
 
         private ObservableCollection<string> answers;
         public ObservableCollection<string> Answers
@@ -32,6 +48,7 @@ namespace TriviaAppClean.ViewModels
 
         public ICommand AnswerCommand4 { get; set; }
         public ICommand NextQuestionCommand { get; set; }
+
         private Color answer1Color;
         public Color Answer1Color
         {
@@ -42,6 +59,7 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Color answer2Color;
         public Color Answer2Color
         {
@@ -52,6 +70,7 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Color answer3Color;
         public Color Answer3Color
         {
@@ -62,6 +81,7 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Color answer4Color;
         public Color Answer4Color
         {
@@ -73,22 +93,6 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        public TheGameViewModel(TriviaWebAPIProxy service)
-        {
-            this.triviaService = service;
-            this.NextQuestionCommand = new Command(GetQuestion);
-            this.AnswerCommand1 = new Command(GetCorrectAnswer1);
-            this.AnswerCommand2 = new Command(GetCorrectAnswer2);
-            this.AnswerCommand3 = new Command(GetCorrectAnswer3);
-            this.AnswerCommand4 = new Command(GetCorrectAnswer4);
-            this.Answer1Color = new Color();
-            this.Answer2Color = new Color();
-            this.Answer3Color = new Color();
-            this.Answer4Color = new Color();
-            Answers = new ObservableCollection<string>();
-            GetQuestion();
-
-        }
         private AmericanQuestion question;
         public AmericanQuestion Question
         {
@@ -98,9 +102,8 @@ namespace TriviaAppClean.ViewModels
                 question = value;
                 OnPropertyChanged();
             }
-
-
         }
+
         private int score;
         public int Score
         {
@@ -111,6 +114,7 @@ namespace TriviaAppClean.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Color buttonColor;
         public Color ButtonColor
         {
@@ -179,6 +183,8 @@ namespace TriviaAppClean.ViewModels
             CheckAnswer(Answer4Color, answer, "Answer4Color");
         }
 
+        
+
         private void CheckAnswer(Color answerColor, string answer, string propName)
         {
             if (question != null)
@@ -190,9 +196,10 @@ namespace TriviaAppClean.ViewModels
                 }
                 else
                     answerColor = Colors.Red;
-
+                
                 OnPropertyChanged(propName);
             }
         }
+        
     }
 }

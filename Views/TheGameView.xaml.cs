@@ -9,4 +9,8 @@ public partial class TheGameView : ContentPage
         InitializeComponent();
 		this.BindingContext = vm;
 	}
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.Navigation.PopModalAsync();
+    }
 }

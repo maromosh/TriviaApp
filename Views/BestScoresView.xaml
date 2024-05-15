@@ -4,7 +4,7 @@
              x:Class="TriviaAppClean.Views.BestScoresView"
              Title="BestScoresView">
     <StackLayout>
-        <Label Text="Best scores" FontSize="Title" TextColor="Purple" FontAttributes="Bold" HorizontalOptions="Center"/>
+        <Label Text="Best scores" FontSize="Title" TextColor="MediumPurple" FontAttributes="Bold" HorizontalOptions="Center"/>
         <CollectionView ItemsSource="{Binding Users}"
                 ItemsLayout="VerticalGrid, 1">
             <CollectionView.ItemTemplate>
