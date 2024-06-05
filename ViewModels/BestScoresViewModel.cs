@@ -14,14 +14,11 @@ namespace TriviaAppClean.ViewModels
         private TriviaWebAPIProxy triviaService;
 
         public BestScoresViewModel(TriviaWebAPIProxy service)
-        {
-
+        { // פעולה בונה אשר קוראת את כל המשתמשים בעזדרת פעולת עזר
             triviaService = service;
             this.Users = new ObservableCollection<User>();
             ReadUsers();
         }
-
-       
 
         private ObservableCollection<User> users;
         public ObservableCollection<User> Users

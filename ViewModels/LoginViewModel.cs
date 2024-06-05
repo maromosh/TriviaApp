@@ -21,7 +21,7 @@ namespace TriviaAppClean.ViewModels
         private MasterAppShell masterAppShell;
 
         public LoginViewModel(TriviaWebAPIProxy service, SignUpView sigunUpView, ManagerAppShell managerShell, UserAppShell userAppShell, MasterAppShell masterAppShell)
-        {
+        { // פעולה בונה אשר מכניסה ערכים התחלתיים
             this.signUpView = sigunUpView;
             InServerCall = false;
             this.triviaService = service;
@@ -159,7 +159,7 @@ namespace TriviaAppClean.ViewModels
         }
         #endregion
         private void ValidateForm()
-        {
+        { 
             ValidateEmail();
             ValidatePassword();
         }

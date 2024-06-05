@@ -36,29 +36,29 @@
                     Text="{Binding Answers[0]}"
                     HorizontalOptions="Start"
                     FontAttributes="Bold" 
-                    Command="{Binding AnswerCommand1 }" />
+                    Command="{Binding AnswerCommand1 }" IsEnabled="{Binding NotAnswered}" />
             <Button Grid.Column="0" Grid.Row="3" 
                     Text="{Binding Answers[1]}"  
                     HorizontalOptions="Start"
                     FontAttributes="Bold" 
                     Command="{Binding AnswerCommand2 }" 
-                    BackgroundColor="{Binding Answer2Color}"/>
+                    BackgroundColor="{Binding Answer2Color}" IsEnabled="{Binding NotAnswered}"/>
             <Button Grid.Column="0" Grid.Row="4"
                     Text="{Binding Answers[2]}" 
                     HorizontalOptions="Start"
                     FontAttributes="Bold" 
                     Command="{Binding AnswerCommand3 }" 
-                    BackgroundColor="{Binding Answer3Color}"/>
+                    BackgroundColor="{Binding Answer3Color}" IsEnabled="{Binding NotAnswered}"/>
             <Button Grid.Column="0" Grid.Row="5"
                     Text="{Binding Answers[3]}"  
                     HorizontalOptions="Start"
                     FontAttributes="Bold" 
                     Command="{Binding AnswerCommand4 }" 
-                    BackgroundColor="{Binding Answer4Color}"/>
+                    BackgroundColor="{Binding Answer4Color}" IsEnabled="{Binding NotAnswered}"/>
 
         </Grid>
         <Button Text="Next question" BackgroundColor="MediumPurple" Command="{Binding NextQuestionCommand}" Margin="50" Padding="20" />
-        <Button Text="Back to homePage" BackgroundColor="MediumPurple" Clicked="Button_Clicked" Margin="50" Padding="20"/>
+        <Button Text="Back to homePage" BackgroundColor="MediumPurple" Command="{Binding FinishGameCommand}" Margin="50" Padding="20"/>
 
     </VerticalStackLayout>
 </ContentPage>

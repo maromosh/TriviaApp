@@ -16,8 +16,8 @@ namespace TriviaAppClean.ViewModels
             this.theGameView = theGameView;
             this.StartGameCommand = new Command(OnStartGame);
         }
-        public ICommand StartGameCommand { get; set; }
-        private async void OnStartGame()
+        public ICommand StartGameCommand { get; set; } //- קומנד שמקושר לדף של המשחק ואם לוחצים עליו
+        private async void OnStartGame() // נכנסים לפעולה אסינכרונית ופותחים בפופ את המשחק.
         {
             await Shell.Current.GoToAsync("theGame");
         }

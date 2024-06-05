@@ -16,7 +16,7 @@ namespace TriviaAppClean.ViewModels
         private TriviaWebAPIProxy triviaService;
 
         public SignUpViewModel(TriviaWebAPIProxy service)
-        {
+        { // פעולה בונה שמקבלת שרת ושדות שהם חובה של המשתמש לענות
             this.triviaService = service;
             this.NameError = "This is a required field";
             this.PasswordError = "This is a required field";
@@ -60,7 +60,7 @@ namespace TriviaAppClean.ViewModels
             }
         }
 
-        private void ValidateName()
+        private void ValidateName() // פעולת עזר את תקינות השם שהוכנס
         {
             this.ShowNameError = string.IsNullOrEmpty(NameSignUp);
         }
@@ -105,7 +105,7 @@ namespace TriviaAppClean.ViewModels
         }
 
         private void ValidateEmail()
-        {
+        { // פעולת עזר שבודקת את התקינות של האימייל שהוכנס
             string email1 = EmailSignUp;
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(email1);
@@ -117,7 +117,7 @@ namespace TriviaAppClean.ViewModels
         private bool showPasswordError;
 
         public bool ShowPasswordError
-        {
+        { // אם יש שגיאה אז משתנה לאמת ומעדכן את הערך ואת השרת
             get => showPasswordError;
             set
             {
@@ -134,7 +134,7 @@ namespace TriviaAppClean.ViewModels
             set
             {
                 passwordSignUp = value;
-                ValidatePassword();
+                ValidatePassword(); 
                 OnPropertyChanged("Password");
             }
         }
@@ -158,7 +158,7 @@ namespace TriviaAppClean.ViewModels
         #endregion
 
         private bool ValidateForm()
-        {
+        { // פעולה שבודקת האם הפרטים של המשתמש נכונים ותקינים בעזרת פעולות עזר
             ValidateEmail();
             ValidatePassword();
             ValidateName();
@@ -171,7 +171,7 @@ namespace TriviaAppClean.ViewModels
 
         public ICommand SignUpCommand { get; set; }
         private async void OnSignUp()
-        {
+        {// פעולה אסינכרונית המבצעת רישום לאפליקציה
             if (ValidateForm())
             {
                 User user = new User()
@@ -181,12 +181,12 @@ namespace TriviaAppClean.ViewModels
                     Password = this.passwordSignUp
                 };
                 bool succes = await triviaService.RegisterUser(user);
-
-                if (!succes)
+                // בוליאני הבודק טם היוזר הצליח להירשם
+                if (!succes) // אם לא מוצגת הודעה המודיעה על השגיאה
                 {
                     await App.Current.MainPage.DisplayAlert("Sign up", "Sign up Faild!", "ok");
                 }
-                else
+                else // אחרת עבר למסך הMainPage
                 {
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
